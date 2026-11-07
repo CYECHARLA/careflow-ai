@@ -1,3 +1,5 @@
+# careflow-ai
+AI-powered healthcare referral and document workflow automation
 # CareFlow AI
 
 A **synthetic-data-only** healthcare administrative workflow portfolio prototype. FastAPI + SQLAlchemy backend, React/TypeScript frontend, PDF/image uploads, OCR, deterministic document classification, referral completeness checks, follow-up tasks, human review, audit events, and mock integrations.
