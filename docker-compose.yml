@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: careflow
+      POSTGRES_USER: careflow
+      POSTGRES_PASSWORD: careflow_local_only
+    volumes: [pgdata:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U careflow"]
+      interval: 5s
+      retries: 10
+  redis:
+    image: redis:7-alpine
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://careflow:careflow_local_only@db:5432/careflow
+      JWT_SECRET: ${JWT_SECRET:-local-demo-secret-change-before-deployment}
+      AI_MODE: demo
+      STORAGE_DIR: /app/storage
+    ports: ["8000:8000"]
+    volumes: [uploads:/app/storage]
+    depends_on:
+      db: {condition: service_healthy}
+  frontend:
+    build: ./frontend
+    ports: ["5173:5173"]
+    depends_on: [backend]
+volumes:
+  pgdata:
+  uploads:

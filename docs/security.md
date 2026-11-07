@@ -1,0 +1,3 @@
+# Security boundaries
+
+This is a synthetic-data portfolio prototype, **not HIPAA-compliant**. Never upload real patient information. Authentication uses bearer JWTs, password hashing, and role checks. Document access is gated through authenticated endpoints. Production readiness would require managed secrets, TLS, token revocation/rotation, access logging and monitoring, malware scanning, secure storage and encryption, retention policies, disaster recovery, vendor agreements/BAAs where applicable, privacy/security risk assessment, and regulatory/legal review. The development login is not safe for public exposure.
